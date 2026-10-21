@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &49777068 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7188733359143229839, guid: a966ed2bf445deb4bba41b7c3d509cad, type: 3}
+  m_PrefabInstance: {fileID: 329257770341595918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &708257237
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,6 +258,11 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!4 &1253321476 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3024379026528980131, guid: a966ed2bf445deb4bba41b7c3d509cad, type: 3}
+  m_PrefabInstance: {fileID: 329257770341595918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &1268141509 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 1710903079936796855, guid: b10ed968e2d21174d9502338beddb910, type: 3}
@@ -269,6 +279,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08605f5a10dd9d44fa768d348f284c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterMotor
+--- !u!114 &1519709842 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3042668038229218273, guid: 838d5c2d792c30045a66ea5bd26799a4, type: 3}
+  m_PrefabInstance: {fileID: 3181477062728527294}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b31e760419122b9469f07cc421e89c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HorizontalGameplayRegionLifecycle
 --- !u!4 &2083073811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7288238567048167237, guid: a966ed2bf445deb4bba41b7c3d509cad, type: 3}
@@ -292,11 +313,11 @@ PrefabInstance:
       objectReference: {fileID: 1268141509}
     - target: {fileID: 7855509409550565781, guid: a966ed2bf445deb4bba41b7c3d509cad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.20278
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7855509409550565781, guid: a966ed2bf445deb4bba41b7c3d509cad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.72985
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7855509409550565781, guid: a966ed2bf445deb4bba41b7c3d509cad, type: 3}
       propertyPath: m_LocalPosition.z
@@ -384,6 +405,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3668209941541435127, guid: b10ed968e2d21174d9502338beddb910, type: 3}
+      propertyPath: gameplayRegions
+      value: 
+      objectReference: {fileID: 1519709842}
+    - target: {fileID: 3668209941541435127, guid: b10ed968e2d21174d9502338beddb910, type: 3}
       propertyPath: initialCameraEntry
       value: 
       objectReference: {fileID: 2083073811}
@@ -404,6 +429,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3042668038229218273, guid: 838d5c2d792c30045a66ea5bd26799a4, type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 1268141509}
+    - target: {fileID: 3042668038229218273, guid: 838d5c2d792c30045a66ea5bd26799a4, type: 3}
+      propertyPath: generationEntry
+      value: 
+      objectReference: {fileID: 49777068}
+    - target: {fileID: 3042668038229218273, guid: 838d5c2d792c30045a66ea5bd26799a4, type: 3}
+      propertyPath: generatedRegionsRoot
+      value: 
+      objectReference: {fileID: 1253321476}
     - target: {fileID: 3151170641125908937, guid: 838d5c2d792c30045a66ea5bd26799a4, type: 3}
       propertyPath: controlledMotor
       value: 

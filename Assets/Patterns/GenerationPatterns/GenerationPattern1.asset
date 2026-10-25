@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee42d4c1a17c014894918669eed5975, type: 3}
+  m_Name: GenerationPattern1
+  m_EditorClassIdentifier: Assembly-CSharp::GenerationPattern
+  patternId: 1
+  objects:
+  - prefab: {fileID: 8192527015852796839, guid: d891ee1f283d4244f9e3635c3c82e936, type: 3}
+    localPosition: {x: 2, y: -2}
+  - prefab: {fileID: 7907585927901023612, guid: a9ef102542cbefc48a89ab80a3ed6526, type: 3}
+    localPosition: {x: 7, y: -4.5}

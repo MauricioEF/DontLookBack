@@ -7,6 +7,7 @@ public class HorizontalGameplayRegionLifecycle : MonoBehaviour
     [SerializeField] private Camera targetCamera;
     [SerializeField] private Transform generatedRegionsRoot;
 
+
     [Header("Region Settings")]
     [SerializeField, Min(0.01f)] private float regionWidth = 16f;
     [SerializeField] private float gridOriginX = 0f;
@@ -16,8 +17,11 @@ public class HorizontalGameplayRegionLifecycle : MonoBehaviour
     [SerializeField, Min(0f)] private float aheadBuffer = 16f;
     [SerializeField, Min(0f)] private float behindBuffer = 16f;
 
-    private readonly Queue<Transform> activeRegions = new();
-    private readonly Stack<Transform> availableRegions = new();
+    [Header("Pattern Selection")]
+    [SerializeField] private GenerationPatternSelector patternSelector;
+
+    private readonly Queue<GameplayRegion> activeRegions = new();
+    private readonly Stack<GameplayRegion> availableRegions = new();
 
     private float nextRegionStartX;
     private int nextRegionId;
@@ -43,13 +47,14 @@ public class HorizontalGameplayRegionLifecycle : MonoBehaviour
             return;
         }
 
-        float leftEdge = GetCameraLeftEdge();
+        if (patternSelector == null || !patternSelector.HasValidPatterns)
+        {
+            Debug.LogError("PatternSelector not found or with non valid patterns", this);
+            return;
+        }
 
-        //Align the initial region to the configured world grid.
-
-        float firstRegionX = gridOriginX + Mathf.Ceil((generationEntry.position.x - gridOriginX) / regionWidth) * regionWidth;
-
-        nextRegionStartX = firstRegionX;
+        nextRegionStartX = gridOriginX + Mathf.Ceil((generationEntry.position.x - gridOriginX) / regionWidth) * regionWidth;
+        patternSelector.ResetSequence();
         initialized = true;
         EnsureCoverage();
     }
@@ -68,9 +73,9 @@ public class HorizontalGameplayRegionLifecycle : MonoBehaviour
 
         while (activeRegions.Count > 0)
         {
-            Transform oldest = activeRegions.Peek();
+            GameplayRegion oldest = activeRegions.Peek();
 
-            float regionEndX = oldest.position.x + regionWidth;
+            float regionEndX = oldest.transform.position.x + regionWidth;
 
             if (regionEndX > cleanupBoundary)
                 break;
@@ -78,6 +83,7 @@ public class HorizontalGameplayRegionLifecycle : MonoBehaviour
 
             //The region contains no gameplay objects yet.
             oldest.gameObject.SetActive(false);
+            oldest.Clear();
             availableRegions.Push(oldest);
         }
     }
@@ -88,26 +94,41 @@ public class HorizontalGameplayRegionLifecycle : MonoBehaviour
 
         while (nextRegionStartX < requiredRightEdge)
         {
-            Transform region = AcquireRegion();
 
-            region.position = new Vector3(nextRegionStartX, generatedRegionsRoot.position.y, generatedRegionsRoot.position.z);
+            if (!patternSelector.TrySelectNext(out GenerationPattern pattern))
+            {
+                Debug.LogError("Unable to select a generation pattern.", this);
+                enabled = false;
+                return;
+            }
+
+            GameplayRegion region = AcquireRegion();
+
+            region.transform.position = new Vector3(nextRegionStartX, generatedRegionsRoot.position.y, generatedRegionsRoot.position.z);
+
+            //Configuring content BEFORE making it visible
+
+            region.Prepare(pattern);
+            region.gameObject.SetActive(true);
+
             activeRegions.Enqueue(region);
 
             nextRegionStartX += regionWidth;
         }
     }
 
-    private Transform AcquireRegion()
+    private GameplayRegion AcquireRegion()
     {
         if (availableRegions.Count > 0)
             return availableRegions.Pop();
 
-        GameObject region = new GameObject($"GameplayRegion_{nextRegionId++}");
+        GameObject regionObject = new GameObject($"GameplayRegion_{nextRegionId++}");
 
-        Transform regionTransform = region.transform;
-        regionTransform.SetParent(generatedRegionsRoot, false);
+        regionObject.SetActive(false);
 
-        return regionTransform;
+        regionObject.transform.SetParent(generatedRegionsRoot, false);
+
+        return regionObject.AddComponent<GameplayRegion>();
     }
 
     private float GetCameraLeftEdge()
@@ -133,9 +154,9 @@ public class HorizontalGameplayRegionLifecycle : MonoBehaviour
         Gizmos.color = Color.cyan;
 
         float regionHeight = 12f;
-        foreach (Transform region in activeRegions)
+        foreach (GameplayRegion region in activeRegions)
         {
-            Vector3 center = new Vector3(region.position.x + regionWidth * 0.5f, region.position.y, region.position.z);
+            Vector3 center = new Vector3(region.transform.position.x + regionWidth * 0.5f, region.transform.position.y, region.transform.position.z);
             Gizmos.DrawWireCube(center, new Vector3(regionWidth, regionHeight, 0f));
         }
     }

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GenerationPattern
   patternId: 3
   objects:
+  - prefab: {fileID: 943758676426304420, guid: bad968e648775704d9bf4b4817efcf4e, type: 3}
+    localPosition: {x: 8, y: -7.5}
   - prefab: {fileID: 8192527015852796839, guid: d891ee1f283d4244f9e3635c3c82e936, type: 3}
     localPosition: {x: 0, y: -5}
   - prefab: {fileID: 8192527015852796839, guid: d891ee1f283d4244f9e3635c3c82e936, type: 3}

@@ -14,6 +14,6 @@ public sealed class PlayerControlController : MonoBehaviour
 
     private void OnDisable()
     {
-        controlledMotor?.Stop();
+        controlledMotor?.ClearMoveDirection();
     }
 }

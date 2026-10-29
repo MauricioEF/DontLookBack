@@ -1,4 +1,7 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 public sealed class InfiniteBackgroundStrip : MonoBehaviour
 {
@@ -27,21 +30,20 @@ public sealed class InfiniteBackgroundStrip : MonoBehaviour
         do
         {
             recycled = false;
-            int leftmostIndex = FindLeftmostChunkIndex();
-            Transform leftmostChunk = chunks[leftmostIndex];
+            Transform randomChunk = FindRandomChunkX(chunks);
 
-            float chunkRightEdge = leftmostChunk.position.x + chunkLength * 0.5f;
+            float chunkRightEdge = randomChunk.position.x + chunkLength * 0.5f;
 
             if (chunkRightEdge >= cameraLeftEdge)
                 continue;
 
             float rightmostX = FindRightmostChunkX();
 
-            Vector3 position = leftmostChunk.position;
+            Vector3 position = randomChunk.position;
 
             position.x = rightmostX + chunkLength;
 
-            leftmostChunk.position = position;
+            randomChunk.position = position;
 
             recycled = true;
         } while (recycled);
@@ -84,5 +86,28 @@ public sealed class InfiniteBackgroundStrip : MonoBehaviour
         }
 
         return rightmostX;
+    }
+
+    private Transform FindRandomChunkX(Transform[] chunks)
+    {
+        if (chunks.Length == 0) {  return null; }
+
+        bool keepSearching = true;
+        Transform randomTransform;
+
+        do 
+        {
+            randomTransform = chunks[Random.Range(0, chunks.Length)];
+            float rightmostChunk = FindRightmostChunkX();
+
+            if (randomTransform.position.x != rightmostChunk && randomTransform.position.x != rightmostChunk - 16f)
+            {
+                keepSearching = false;
+                return randomTransform;
+            }
+
+        } while (keepSearching);
+
+        return randomTransform;
     }
 }

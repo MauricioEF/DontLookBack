@@ -125,7 +125,7 @@ public sealed class CharacterJumpController : MonoBehaviour
     {
         if (isGrounded)
         {
-            coyoteRemaining -= coyoteTime;
+            coyoteRemaining = coyoteTime;
             remainingAirJumps = maxAirJumps;
             ResetJumpAscent();
             return;

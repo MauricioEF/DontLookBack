@@ -423,7 +423,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3265868955122705578, guid: b7ea6e80d21cb63479cec98498b646eb, type: 3}
   m_PrefabInstance: {fileID: 8079271055427513261}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8079271055427513262}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08605f5a10dd9d44fa768d348f284c83, type: 3}
@@ -551,10 +551,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GenerationPatternSelector
   patterns:
-  - {fileID: 11400000, guid: f1bc932611a8aeb4cb3e2778e9b20e82, type: 2}
-  - {fileID: 11400000, guid: f0a595249d7dfcb438e905d5dd11c4af, type: 2}
-  - {fileID: 11400000, guid: 5f95eef7e14d4c84783795de75ae6e64, type: 2}
   - {fileID: 11400000, guid: 72c73d5603a967942956442494291ef4, type: 2}
+  - {fileID: 11400000, guid: cc1cffffdfdf15a4285fa551fb620a71, type: 2}
+  - {fileID: 11400000, guid: 04bb4a83a2f5aa8469d526296786d758, type: 2}
 --- !u!4 &2083073811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7288238567048167237, guid: a966ed2bf445deb4bba41b7c3d509cad, type: 3}
@@ -858,8 +857,50 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 435266832235900183, guid: b7ea6e80d21cb63479cec98498b646eb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8079271055427513265}
   m_SourcePrefab: {fileID: 100100000, guid: b7ea6e80d21cb63479cec98498b646eb, type: 3}
+--- !u!1 &8079271055427513262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 435266832235900183, guid: b7ea6e80d21cb63479cec98498b646eb, type: 3}
+  m_PrefabInstance: {fileID: 8079271055427513261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &8079271055427513263 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4892587907630011435, guid: b7ea6e80d21cb63479cec98498b646eb, type: 3}
+  m_PrefabInstance: {fileID: 8079271055427513261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8079271055427513264 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6355800738522415195, guid: b7ea6e80d21cb63479cec98498b646eb, type: 3}
+  m_PrefabInstance: {fileID: 8079271055427513261}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8079271055427513262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370cfb45dea3d7744800fcff280298f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundSensor
+--- !u!114 &8079271055427513265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8079271055427513262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 467058be3a85f9c41801e920df19d6d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HorizontalTraversalProbe
+  inputReader: {fileID: 653347016}
+  motor: {fileID: 1350161430}
+  groundSensor: {fileID: 8079271055427513264}
+  bodyCollider: {fileID: 8079271055427513263}
+  scrollingCamera: {fileID: 1268141509}
+  maxRecordingDuration: 8
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
